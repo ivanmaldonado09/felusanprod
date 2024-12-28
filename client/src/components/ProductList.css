@@ -1,0 +1,227 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+  }
+  
+  /* Contenedor principal de la lista de productos */
+  .product-list-container {
+    width: 80%;
+    margin: 2rem auto;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Botón para agregar producto */
+  .add-product-btn {
+    display: block;
+    width: 200px;
+    margin: 1rem auto;
+    padding: 0.8rem;
+    background-color: #4CAF50;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .add-product-btn:hover {
+    background-color: #45a049;
+  }
+  
+  .add-product-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Tabla de productos */
+  .product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+  }
+  
+  .product-table th,
+  .product-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .product-table th {
+    background-color: #f4f4f4;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .product-table td {
+    color: #555;
+  }
+  
+  /* Estilo para las celdas de acciones */
+  .product-table .edit-btn,
+  .product-table .delete-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .product-table .edit-btn {
+    background-color: #2196F3;
+    color: white;
+  }
+  
+  .product-table .edit-btn:hover {
+    background-color: #1976d2;
+  }
+  
+  .product-table .delete-btn {
+    background-color: #f44336;
+    color: white;
+    margin-left: 0.5rem;
+  }
+  
+  .product-table .delete-btn:hover {
+    background-color: #e53935;
+  }
+  
+  .product-table button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Mensaje de carga */
+  .loading {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #333;
+    margin-top: 2rem;
+  }
+  
+  /* Mensaje de error */
+  .error-message {
+    text-align: center;
+    font-size: 1rem;
+    color: #f44336;
+    margin-top: 2rem;
+  }
+  
+  /* Mensaje cuando no hay productos */
+  .product-list-container p {
+    text-align: center;
+    font-size: 1rem;
+    color: #555;
+    margin-top: 2rem;
+  }
+  
+
+
+
+/* Media Query para dispositivos móviles */
+@media (max-width: 768px) {
+    /* Ajuste del contenedor de productos */
+    .product-list-container {
+      width: 95%;
+      padding: 1rem;
+    }
+  
+    /* Estilo de la tabla en pantallas pequeñas */
+    .product-table {
+      font-size: 0.9rem;
+    }
+  
+    .product-table th,
+    .product-table td {
+      padding: 0.8rem;
+    }
+  
+    /* Botón para agregar producto */
+    .add-product-btn {
+      width: 100%;
+      font-size: 0.9rem;
+    }
+  
+    /* Ajustes a los botones dentro de la tabla */
+    .product-table .edit-btn,
+    .product-table .delete-btn {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.9rem;
+    }
+  
+    /* Cambios en el mensaje de carga y error */
+    .loading,
+    .error-message {
+      font-size: 1rem;
+    }
+  
+    /* Acomodar el texto de "no hay productos" */
+    .product-list-container p {
+      font-size: 0.9rem;
+    }
+
+    .admin-container button{
+      width: 100%;
+      font-size: 0.9rem;
+      margin-left: 20px;
+    }
+  }
+  
+  /* Media Query para pantallas muy pequeñas (por ejemplo, móviles en orientación vertical) */
+  @media (max-width: 480px) {
+    /* Ajuste adicional para los botones */
+    .add-product-btn {
+      font-size: 0.85rem;
+      padding: 0.6rem;
+    }
+  
+    /* Tabla más compacta */
+    .product-table {
+      font-size: 0.8rem;
+    }
+  
+    .product-table th,
+    .product-table td {
+      padding: 0.6rem;
+    }
+  
+    .product-table .edit-btn,
+    .product-table .delete-btn {
+      padding: 0.4rem 0.7rem;
+      font-size: 0.8rem;
+    }
+  
+    /* Mensaje de carga y error más pequeño */
+    .loading,
+    .error-message {
+      font-size: 0.9rem;
+    }
+
+   
+
+  }
+
+  .admin-container {
+    width: 80%;
+    display: flex;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }

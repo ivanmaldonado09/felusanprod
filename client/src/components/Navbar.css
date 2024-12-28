@@ -1,0 +1,217 @@
+/* Estilo general para el Navbar */
+.navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #000;
+  color: white;
+  padding: 10px 20px;
+}
+
+.navbar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 10px; /* Espacio entre navbar-top y navbar-bottom */
+}
+
+.navbar-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+}
+
+.navbar-title:hover {
+  color: #f4b400;
+}
+
+/* Contenedor para buscador y carrito */
+.search-cart-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 600px; /* Opcional para limitar ancho */
+}
+
+.fa-shopping-cart{
+  display: flex;         /* Activa flexbox */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center;   /* Centra verticalmente */
+  text-align: center;    /* Asegura que el texto esté centrado */
+  height: 100%;          /* Asegúrate de que el contenedor tenga altura */
+}
+
+
+
+.search {
+  flex-grow: 1;
+}
+
+.search input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background-color: transparent;
+  color: white;
+}
+
+.search input::placeholder {
+  color: #ccc;
+}
+
+/* Iconos a la derecha */
+.navbar-icons {
+  margin-left: 10px; /* Separación del buscador */
+}
+
+.navbar-icons a {
+  color: white;
+  font-size: 1.2rem;
+  position: relative;
+}
+
+
+
+/* Menú hamburguesa */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.hamburger .bar {
+  width: 100%;
+  height: 3px;
+  background-color: white;
+}
+
+/* Navbar inferior */
+.navbar-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap; /* Permite que los botones se ajusten */
+  gap: 10px;
+}
+
+.navbar-bottom button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+  font-family: 'Cambria, Cochin, Georgia, Times, 'Times New Roman', serif';
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.navbar-bottom button:hover {
+  color: #f4b400;
+}
+
+/* Línea gris separadora debajo del Navbar */
+.navbar::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: #ccc;
+  margin-top: 10px;
+}
+
+/* Modo móvil */
+@media (max-width: 768px) {
+  .navbar-top {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .search-cart-container {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  .search input {
+    width: calc(100% - 50px); /* Ajusta ancho del buscador */
+  }
+
+  .navbar-icons {
+    margin-left: 0; /* Elimina margen en móvil */
+  }
+
+  .hamburger {
+    display: flex;
+    margin-top: 10px;
+  }
+
+  .navbar-bottom {
+    display: none;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+
+  .navbar-bottom.active {
+    display: flex;
+  }
+
+  .navbar::after {
+    margin-bottom: 80px;
+  }
+}
+
+
+/* Estilo para dropdown */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #000;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+  z-index: 10;
+}
+
+.dropdown-menu button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.dropdown-menu button:hover {
+  background-color: #f4b400;
+  color: #000;
+}
+
+
+.cart {
+  position: relative;
+}
+
+.cart-dot {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 10px;
+  height: 10px;
+  background-color: yellow;
+  border-radius: 50%;
+  z-index: 2;
+}

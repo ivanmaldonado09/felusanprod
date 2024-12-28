@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'OPTIFutura';
+    src: url('/public/fonts/OPTIFutura-ExtraBlackCond.otf') format('opentype');
+}
+
+
+h2 {
+    font-family: 'OPTIFutura';
+    text-align: center;
+    font-weight: bold;
+}
