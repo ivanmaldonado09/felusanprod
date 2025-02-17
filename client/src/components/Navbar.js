@@ -113,7 +113,7 @@ const Navbar = () => {
             <div className="dropdown-menu">
               <button onClick={() => navigate(`/productos?tipo=algodon-Short`)}>Algodón</button>
               <button onClick={() => navigate(`/productos?tipo=jean-Short`)}>Jean</button>
-              <button onClick={() => navigate(`/productos?tipo=bengalina-Short`)}>Bengalina</button>
+              <button onClick={() => navigate(`/productos?tipo=sastrero-Short`)}>Sastrero</button>
             </div>
           )}
         </div>
@@ -131,6 +131,57 @@ const Navbar = () => {
             </div>
           )}
         </div>
+
+
+
+        <div
+          className="dropdown"
+          onMouseEnter={() => manejarSubmenu('bodys')}
+          onMouseLeave={() => manejarSubmenu(null)}
+        >
+          <button onClick={() => navigate(`/productos?prenda=body`)}>Bodys</button>
+          {submenuActivo === 'bodys' && (
+            <div className="dropdown-menu">
+              <button onClick={() => navigate(`/productos?tipo=morley-Body`)}>Morley</button>
+              <button onClick={() => navigate(`/productos?tipo=microfibra-Body`)}>Microfibra</button>
+            </div>
+          )}
+        </div>
+
+
+        <div
+          className="dropdown"
+          onMouseEnter={() => manejarSubmenu('accesorios')}
+          onMouseLeave={() => manejarSubmenu(null)}
+        >
+          <button onClick={() => navigate(`/productos?prenda=accesorio`)}>Accesorios</button>
+          {submenuActivo === 'accesorios' && (
+            <div className="dropdown-menu">
+              <button onClick={() => navigate(`/productos?tipo=gorras-Accesorio`)}>Gorras</button>
+            </div>
+          )}
+        </div>
+
+
+
+        <div
+          className="dropdown"
+          onMouseEnter={() => manejarSubmenu('superiores')}
+          onMouseLeave={() => manejarSubmenu(null)}
+        >
+          <button onClick={() => navigate(`/productos?prenda=superior`)}>Prendas superiores</button>
+          {submenuActivo === 'superiores' && (
+            <div className="dropdown-menu">
+              <button onClick={() => navigate(`/productos?tipo=bando-Superior`)}>Bando</button>
+              <button onClick={() => navigate(`/productos?tipo=strapless-Superior`)}>Strapelss</button>
+              <button onClick={() => navigate(`/productos?tipo=top-Superior`)}>Top</button>
+              <button onClick={() => navigate(`/productos?tipo=corset-Superior`)}>Corset</button>
+
+            </div>
+          )}
+        </div>
+
+
       </div>
     </div>
   );
