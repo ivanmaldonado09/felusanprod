@@ -29,7 +29,7 @@ try {
     $precio = $_POST['precio'] ?? '';
     $genero = $_POST['genero'] ?? '';
     $prenda = $_POST['prenda'] ?? '';
-    $tipo_id = $_POST['tipo_id'] ?? '';
+    $categoria_id = $_POST['categoria_id'] ?? '';
     $ofertado = $_POST['ofertado'] ?? '0';
     $precio_oferta = $_POST['precio_oferta'] ?? null;
     
@@ -49,7 +49,7 @@ try {
         precio = ?, 
         genero = ?, 
         prenda = ?, 
-        tipo_id = ?, 
+        categoria_id = ?, 
         ofertado = ?, 
         precio_oferta = ?
         WHERE id = ?");
@@ -59,7 +59,7 @@ try {
         $precio, 
         $genero, 
         $prenda, 
-        $tipo_id, 
+        $categoria_id, 
         $ofertado, 
         $precio_oferta,
         $id
