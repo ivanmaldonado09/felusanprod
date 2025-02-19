@@ -39,7 +39,7 @@ try {
     error_log("FILES data: " . print_r($_FILES, true));
 
     // Validar campos básicos del producto
-    $requiredFields = ['nombre', 'precio', 'genero', 'prenda', 'tipo_id'];
+    $requiredFields = ['nombre', 'precio', 'genero', 'categoria_id'];
     foreach ($requiredFields as $field) {
         if (!isset($_POST[$field]) || empty($_POST[$field])) {
             handleError("Campo requerido faltante: $field");
@@ -70,8 +70,7 @@ try {
     $nombre = $_POST['nombre'];
     $precio = (float)$_POST['precio'];
     $genero = $_POST['genero'];
-    $prenda = $_POST['prenda'];
-    $tipo_id = (int)$_POST['tipo_id'];
+    $categoria_id = (int)$_POST['categoria_id'];
     $ofertado = (int)$_POST['ofertado'];
     $precio_oferta = $ofertado === 1 ? (float)$_POST['precio_oferta'] : $precio;
 
@@ -80,15 +79,14 @@ try {
 
     try {
         // Insertar producto en la tabla productos
-        $queryProducto = "INSERT INTO productos (nombre, precio, genero, prenda, tipo_id, ofertado, precio_oferta) 
-                         VALUES (:nombre, :precio, :genero, :prenda, :tipo_id, :ofertado, :precio_oferta)";
+        $queryProducto = "INSERT INTO productos (nombre, precio, genero, categoria_id, ofertado, precio_oferta) 
+                         VALUES (:nombre, :precio, :genero, :categoria_id, :ofertado, :precio_oferta)";
         $stmtProducto = $conn->prepare($queryProducto);
         $stmtProducto->execute([
             ':nombre' => $nombre,
             ':precio' => $precio,
             ':genero' => $genero,
-            ':prenda' => $prenda,
-            ':tipo_id' => $tipo_id,
+            ':categoria_id' => $categoria_id,
             ':ofertado' => $ofertado,
             ':precio_oferta' => $precio_oferta
         ]);

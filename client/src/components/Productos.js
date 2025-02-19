@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { obtenerProductos } from "../api/productoApi";
 import ProductoCard from "./ProductoCard";
+import { useLocation } from "react-router-dom";
 import "./Productos.css";
-import { useLocation} from "react-router-dom";
 
 const Productos = () => {
   const [productos, setProductos] = useState([]);
@@ -10,6 +10,8 @@ const Productos = () => {
     talle: [],
     genero: "",
     precio: { min: 0, max: Infinity },
+    categoria: "",
+    subcategoria: ""
   });
   const [filtroActivo, setFiltroActivo] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -36,8 +38,8 @@ const Productos = () => {
   useEffect(() => {
     const query = new URLSearchParams(location.search);
     const searchQuery = query.get("search") || "";
-    const prendaQuery = query.get("prenda") || "";
-    const tipoQuery = query.get("tipo") || "";
+    const categoriaQuery = query.get("categoria") || "";
+    const subcategoriaQuery = query.get("subcategoria") || "";
     const generoQuery = query.get("genero") || "";
     const talleQuery = query.get("talle") ? query.get("talle").split(",") : [];
     const minPrecio = query.get("minPrecio") || 0;
@@ -47,8 +49,8 @@ const Productos = () => {
       genero: generoQuery,
       talle: talleQuery,
       precio: { min: Number(minPrecio), max: Number(maxPrecio) },
-      prenda: prendaQuery,
-      tipo: tipoQuery,
+      categoria: categoriaQuery,
+      subcategoria: subcategoriaQuery,
     });
     setSearchTerm(searchQuery);
   }, [location.search]);
@@ -57,22 +59,42 @@ const Productos = () => {
   useEffect(() => {
     const filtrarProductos = () => {
       return productos.filter((producto) => {
+        // Búsqueda en nombre y descripción
         const cumpleBusqueda =
           producto.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
           producto.descripcion.toLowerCase().includes(searchTerm.toLowerCase());
 
-        const cumplePrenda = !filtros.prenda || producto.prenda === filtros.prenda;
+        // Filtrar por categoría: si se pasa el parámetro, se compara con producto.categoria_id
+        const cumpleCategoria =
+          !filtros.categoria ||
+          Number(producto.categoria_id) === Number(filtros.categoria);
 
-        const cumpleTipo = !filtros.tipo || producto.tipo_nombre === filtros.tipo;
+        // Filtrar por subcategoría: si se pasa, se compara con producto.subcategoria_id
+        const cumpleSubcategoria =
+          !filtros.subcategoria ||
+          Number(producto.subcategoria_id) === Number(filtros.subcategoria);
 
         const cumpleTalle =
-          filtros.talle.length === 0 || filtros.talle.some((talle) => producto.talles.includes(talle));
-        const cumpleGenero =
-          !filtros.genero || producto.genero === filtros.genero || producto.genero === "X";
-        const cumplePrecio =
-          producto.precio >= filtros.precio.min && producto.precio <= filtros.precio.max;
+          filtros.talle.length === 0 ||
+          filtros.talle.some((talle) => producto.talles && producto.talles.includes(talle));
 
-        return cumpleBusqueda && cumpleTalle && cumpleGenero && cumplePrecio && cumplePrenda && cumpleTipo;
+        const cumpleGenero =
+          !filtros.genero ||
+          producto.genero === filtros.genero ||
+          producto.genero === "X";
+
+        const cumplePrecio =
+          producto.precio >= filtros.precio.min &&
+          producto.precio <= filtros.precio.max;
+
+        return (
+          cumpleBusqueda &&
+          cumpleCategoria &&
+          cumpleSubcategoria &&
+          cumpleTalle &&
+          cumpleGenero &&
+          cumplePrecio
+        );
       });
     };
     setProductosFiltrados(filtrarProductos());
@@ -96,36 +118,36 @@ const Productos = () => {
     };
   }, []);
 
+  // Manejar cambio de filtros
+  const manejarCambioFiltro = (filtro, valor) => {
+    setFiltros((prevFiltros) => {
+      if (filtro === "talle") {
+        const tallesActualizados = prevFiltros.talle.includes(valor)
+          ? prevFiltros.talle.filter((t) => t !== valor)
+          : [...prevFiltros.talle, valor];
+        return { ...prevFiltros, talle: tallesActualizados };
+      } else if (filtro === "genero") {
+        return { ...prevFiltros, genero: prevFiltros.genero === valor ? "" : valor };
+      } else if (filtro === "precio") {
+        const nuevoPrecio = { ...prevFiltros.precio, ...valor };
+        return { ...prevFiltros, precio: nuevoPrecio };
+      }
+      return prevFiltros;
+    });
+  };
 
-    // Manejar cambio de filtros
-    const manejarCambioFiltro = (filtro, valor) => {
-      setFiltros((prevFiltros) => {
-        if (filtro === "talle") {
-          const tallesActualizados = prevFiltros.talle.includes(valor)
-            ? prevFiltros.talle.filter((t) => t !== valor)
-            : [...prevFiltros.talle, valor];
-          return { ...prevFiltros, talle: tallesActualizados };
-        } else if (filtro === "genero") {
-          return { ...prevFiltros, genero: prevFiltros.genero === valor ? "" : valor };
-        } else if (filtro === "precio") {
-          const nuevoPrecio = { ...prevFiltros.precio, ...valor };
-          return { ...prevFiltros, precio: nuevoPrecio };
-        }
-        return prevFiltros;
-      });
-    };
-  
-    // Alternar el estado de los filtros desplegables
-    const alternarFiltroActivo = (filtro) => {
-      setFiltroActivo((prev) => (prev === filtro ? null : filtro));
-    };
+  // Alternar el estado de los filtros desplegables
+  const alternarFiltroActivo = (filtro) => {
+    setFiltroActivo((prev) => (prev === filtro ? null : filtro));
+  };
+
   return (
     <div className="container">
       {error && <p>{error}</p>}
 
       {/* Filtros */}
       <div className="filtros">
-      <div className={`filtro ${filtroActivo === "talle" ? "filtro-activo" : ""}`}>
+        <div className={`filtro ${filtroActivo === "talle" ? "filtro-activo" : ""}`}>
           <button onClick={() => alternarFiltroActivo("talle")}>
             Talles <span>{filtroActivo === "talle" ? "-" : "+"}</span>
           </button>
@@ -167,7 +189,7 @@ const Productos = () => {
           </button>
           <div className="filtro-opciones">
             <label>
-            Desde:
+              Desde:
               <input
                 type="number"
                 className="form__field"

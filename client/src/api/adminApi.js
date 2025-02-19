@@ -3,8 +3,8 @@ import axios from 'axios';
 
 
 // URL de la API
-//const API_URL = 'http://localhost/client/locall.php';
- const API_URL = 'http://felusan.com/locall.php';
+//const API_URL = 'http://felusan.com/locall.php';
+const API_URL = 'http://localhost/felusanprod/client/locall.php';
 
 
 // Función para obtener la contraseña

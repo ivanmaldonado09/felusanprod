@@ -1,0 +1,121 @@
+/* Contenedor principal */
+.containerL {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    color: #333;
+    max-width: 100%;
+    margin: auto;
+  }
+  
+  /* Estilos para la tabla */
+  .tableL {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    width: 100%;
+  }
+  
+  .tableL th,
+  .tableL td {
+    vertical-align: middle;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  /* Filas de categorías principales con fondo claro */
+  .tableL-primary {
+    background-color: #f0f8ff; /* azul muy claro */
+  }
+  
+  /* Filas de subcategorías con fondo aún más claro */
+  .tableL-secondary {
+    background-color: #fafafa; /* gris muy claro */
+  }
+  
+  /* Botones */
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+  }
+  
+  .btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #fff;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+  }
+  
+  /* Clases para márgenes */
+  .mt-4 {
+    margin-top: 1.5rem;
+  }
+  
+  .mb-3 {
+    margin-bottom: 1rem;
+  }
+  
+  .me-2 {
+    margin-right: 0.5rem;
+  }
+  
+  /* Alertas */
+  .alert {
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+  
+  .alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+  
+  /* Contenedor responsive para la tabla */
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  /* Media queries para dispositivos medianos y pequeños */
+  @media (max-width: 768px) {
+    .containerL {
+      padding: 10px;
+    }
+    
+    .tableL th,
+    .tableL td {
+      padding: 8px;
+      font-size: 0.9rem;
+    }
+    
+    .btn {
+      font-size: 0.8rem;
+      padding: 5px 10px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .tableL th,
+    .tableL td {
+      padding: 5px;
+      font-size: 0.8rem;
+    }
+    
+    .btnL {
+      font-size: 0.75rem;
+      padding: 4px 8px;
+    }
+    
+    h2 {
+      font-size: 1.25rem;
+    }
+  }
+  

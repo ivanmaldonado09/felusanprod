@@ -10,7 +10,9 @@ import ProductForm from './components/ProductForm';
 import './App.css';
 import AgregarTalle from './components/AgregarTalle';
 import AgregarColor from './components/AgregarColor';
-import AgregarTipo from './components/AgregarTipo';
+import AgregarCategoria from './components/AgregarCategoria';
+import ListaCategorias from './components/ListaCategorias';
+import EditarCategoria from './components/EditarCategoria';
 
 const App = () => {
   return (
@@ -36,7 +38,12 @@ const App = () => {
 
         <Route path="/admin/agregarColor" element={<AgregarColor />} />
 
-        <Route path="/admin/agregarTipo" element={<AgregarTipo />} />
+        <Route path="/admin/categorias" element={<ListaCategorias />} />
+
+        <Route path="/admin/agregarCategoria" element={<AgregarCategoria />} />
+
+        <Route path="/admin/editarCategoria/:id" element={<EditarCategoria />} />
+
       </Routes>
       
     </Router>

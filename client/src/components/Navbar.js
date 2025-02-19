@@ -1,22 +1,42 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
 import { CartContext } from './CartContext';
 import './Navbar.css';
 
 const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [menuActivo, setMenuActivo] = useState(false);
-  const [submenuActivo, setSubmenuActivo] = useState(null); // Nuevo estado para manejar submenús
-  const { cartCount } = useContext(CartContext); // Usar el contexto
-  
+  const [submenuActivo, setSubmenuActivo] = useState(null);
+  const [categories, setCategories] = useState([]);
+
+  const { cartCount } = useContext(CartContext);
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Obtener las categorías desde la API
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get('http://localhost/felusanprod/client/apis/obtener_categorias.php');
+        if (response.data.success) {
+          setCategories(response.data.data);
+        } else {
+          console.error("Error en la respuesta de la API:", response.data);
+        }
+      } catch (error) {
+        console.error("Error al obtener categorías:", error);
+      }
+    };
+    fetchCategories();
+  }, []);
+
+  // Filtrar solo las categorías principales que se deben mostrar (es_mostrada true)
+  const mainCategories = categories.filter(categoria => categoria.es_mostrada);
 
   const manejarCambioBusqueda = (e) => {
     const nuevoTermino = e.target.value;
     setSearchTerm(nuevoTermino);
-
     if (location.pathname === '/productos' || location.pathname === '/') {
       if (nuevoTermino) {
         navigate(`/productos?search=${nuevoTermino}`);
@@ -54,7 +74,7 @@ const Navbar = () => {
           </div>
 
           <div className="navbar-icons">
-          <div className="cart" onClick={() => navigate('/carrito')} style={{ cursor: 'pointer' }}>
+            <div className="cart" onClick={() => navigate('/carrito')} style={{ cursor: 'pointer' }}>
               <i className="fas fa-shopping-cart"></i>
               {cartCount > 0 && <span className="cart-dot"></span>}
             </div>
@@ -73,115 +93,37 @@ const Navbar = () => {
         <button onClick={() => manejarFiltroGenero('M')}>HOMBRE</button>
         <button onClick={() => manejarFiltroGenero('F')}>MUJER</button>
 
-        <div
-          className="dropdown"
-          onMouseEnter={() => manejarSubmenu('remeras')}
-          onMouseLeave={() => manejarSubmenu(null)}
-        >
-          <button onClick={() => navigate(`/productos?prenda=remera`)}>Remeras</button>
-          {submenuActivo === 'remeras' && (
-            <div className="dropdown-menu">
-              <button onClick={() => navigate(`/productos?tipo=regular-Remera`)}>Regular</button>
-              <button onClick={() => navigate(`/productos?tipo=oversize-Remera`)}>Oversize</button>
-              <button onClick={() => navigate(`/productos?tipo=musculosa-Remera`)}>Musculosa</button>
-              <button onClick={() => navigate(`/productos?tipo=boxyfit-Remera`)}>Boxy Fit</button>
+        {mainCategories.map(mainCat => {
+          // Filtrar las subcategorías que también tengan es_mostrada true
+          const subCategoriasMostradas = mainCat.subcategorias
+            ? mainCat.subcategorias.filter(sub => sub.es_mostrada)
+            : [];
+
+          return (
+            <div
+              key={mainCat.id}
+              className="dropdown"
+              onMouseEnter={() => manejarSubmenu(mainCat.id)}
+              onMouseLeave={() => manejarSubmenu(null)}
+            >
+              <button onClick={() => navigate(`/productos?categoria=${mainCat.id}`)}>
+                {mainCat.nombre}
+              </button>
+              {submenuActivo === mainCat.id && subCategoriasMostradas.length > 0 && (
+                <div className="dropdown-menu">
+                  {subCategoriasMostradas.map(sub => (
+                    <button
+                      key={sub.id}
+                      onClick={() => navigate(`/productos?categoria=${mainCat.id}&subcategoria=${sub.id}`)}
+                    >
+                      {sub.nombre}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
-          )}
-        </div>
-
-        <div
-          className="dropdown"
-          onMouseEnter={() => manejarSubmenu('jeans')}
-          onMouseLeave={() => manejarSubmenu(null)}
-        >
-          <button onClick={() => navigate(`/productos?prenda=jean`)}>Jeans</button>
-          {submenuActivo === 'jeans' && (
-            <div className="dropdown-menu">
-              <button onClick={() => navigate(`/productos?tipo=cargo-Jean`)}>Cargo</button>
-              <button onClick={() => navigate(`/productos?tipo=mom-Jean`)}>Mom</button>
-            </div>
-          )}
-        </div>
-
-        <div
-          className="dropdown"
-          onMouseEnter={() => manejarSubmenu('shorts')}
-          onMouseLeave={() => manejarSubmenu(null)}
-        >
-          <button onClick={() => navigate(`/productos?prenda=short`)}>Shorts</button>
-          {submenuActivo === 'shorts' && (
-            <div className="dropdown-menu">
-              <button onClick={() => navigate(`/productos?tipo=algodon-Short`)}>Algodón</button>
-              <button onClick={() => navigate(`/productos?tipo=jean-Short`)}>Jean</button>
-              <button onClick={() => navigate(`/productos?tipo=sastrero-Short`)}>Sastrero</button>
-            </div>
-          )}
-        </div>
-
-        <div
-          className="dropdown"
-          onMouseEnter={() => manejarSubmenu('bermudas')}
-          onMouseLeave={() => manejarSubmenu(null)}
-        >
-          <button onClick={() => navigate(`/productos?prenda=bermuda`)}>Bermudas</button>
-          {submenuActivo === 'bermudas' && (
-            <div className="dropdown-menu">
-              <button onClick={() => navigate(`/productos?tipo=algodon-Bermuda`)}>Algodón</button>
-              <button onClick={() => navigate(`/productos?tipo=jean-Bermuda`)}>Jean</button>
-            </div>
-          )}
-        </div>
-
-
-
-        <div
-          className="dropdown"
-          onMouseEnter={() => manejarSubmenu('bodys')}
-          onMouseLeave={() => manejarSubmenu(null)}
-        >
-          <button onClick={() => navigate(`/productos?prenda=body`)}>Bodys</button>
-          {submenuActivo === 'bodys' && (
-            <div className="dropdown-menu">
-              <button onClick={() => navigate(`/productos?tipo=morley-Body`)}>Morley</button>
-              <button onClick={() => navigate(`/productos?tipo=microfibra-Body`)}>Microfibra</button>
-            </div>
-          )}
-        </div>
-
-
-        <div
-          className="dropdown"
-          onMouseEnter={() => manejarSubmenu('accesorios')}
-          onMouseLeave={() => manejarSubmenu(null)}
-        >
-          <button onClick={() => navigate(`/productos?prenda=accesorio`)}>Accesorios</button>
-          {submenuActivo === 'accesorios' && (
-            <div className="dropdown-menu">
-              <button onClick={() => navigate(`/productos?tipo=gorras-Accesorio`)}>Gorras</button>
-            </div>
-          )}
-        </div>
-
-
-
-        <div
-          className="dropdown"
-          onMouseEnter={() => manejarSubmenu('superiores')}
-          onMouseLeave={() => manejarSubmenu(null)}
-        >
-          <button onClick={() => navigate(`/productos?prenda=superior`)}>Prendas superiores</button>
-          {submenuActivo === 'superiores' && (
-            <div className="dropdown-menu">
-              <button onClick={() => navigate(`/productos?tipo=bando-Superior`)}>Bando</button>
-              <button onClick={() => navigate(`/productos?tipo=strapless-Superior`)}>Strapelss</button>
-              <button onClick={() => navigate(`/productos?tipo=top-Superior`)}>Top</button>
-              <button onClick={() => navigate(`/productos?tipo=corset-Superior`)}>Corset</button>
-
-            </div>
-          )}
-        </div>
-
-
+          );
+        })}
       </div>
     </div>
   );

@@ -28,7 +28,6 @@ try {
     $nombre = $_POST['nombre'] ?? '';
     $precio = $_POST['precio'] ?? '';
     $genero = $_POST['genero'] ?? '';
-    $prenda = $_POST['prenda'] ?? '';
     $categoria_id = $_POST['categoria_id'] ?? '';
     $ofertado = $_POST['ofertado'] ?? '0';
     $precio_oferta = $_POST['precio_oferta'] ?? null;
@@ -47,8 +46,7 @@ try {
     $stmt = $conn->prepare("UPDATE productos SET 
         nombre = ?, 
         precio = ?, 
-        genero = ?, 
-        prenda = ?, 
+        genero = ?,
         categoria_id = ?, 
         ofertado = ?, 
         precio_oferta = ?
@@ -57,8 +55,7 @@ try {
     if (!$stmt->execute([
         $nombre, 
         $precio, 
-        $genero, 
-        $prenda, 
+        $genero,
         $categoria_id, 
         $ofertado, 
         $precio_oferta,
