@@ -34,6 +34,7 @@
   background: transparent;
   border: none;
   cursor: pointer;
+  z-index: 9999;
 }
 
 /* Contenedor interior del modal (imagen e info) */
