@@ -19,7 +19,7 @@ const AgregarCupon = () => {
         setSuccess(null); // Limpiar mensajes de éxito anteriores
 
         try {
-            const response = await fetch('http://localhost/felusanprod/client/apis/agregarCupon.php', {
+            const response = await fetch('http://felusan.com/apis/agregarCupon.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

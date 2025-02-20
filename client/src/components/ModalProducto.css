@@ -1,91 +1,117 @@
-/* Estilos base para el modal */
+/* ----------- ESTILOS BASE (DESKTOP) ----------- */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  opacity: 1;
-  visibility: visible;
 }
 
+.modal-content {
+  position: relative;   /* Para posicionar la X (botón de cerrar) */
+  background: #1f1e1e;  /* Fondo oscuro */
+  color: #fff;          /* Texto blanco */
+  padding: 2rem;
+  width: 90%;
+  max-width: 850px;     /* Tamaño máximo en desktop */
+  display: flex;
+  flex-direction: row;  /* Imagen e info en la misma fila en desktop */
+  border-radius: 8px;
+}
 
+/* Botón de cerrar (X) */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  color: #fff;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
 
+/* Contenedor interior del modal (imagen e info) */
 .modal-body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
+  width: 100%;
 }
 
-.modal.hidden {
-  opacity: 0;
-  visibility: hidden;
-}
-
-/* Ajuste general del modal */
-.modal-content {
-  background: #1f1e1e; /* Fondo negro */
-  color: #fff; /* Texto blanco */
-  padding: 2rem;
-  width: 90%;
-  max-width: 850px;
-  display: flex;
-  border-radius: 8px; /* Sin bordes redondeados */
-}
-
-/* Columna de la imagen */
+/* ---------------- FOTO (desktop) ---------------- */
 .foto-container {
-  flex: 1;
+  flex: 1;                   /* Ocupa la mitad aprox. */
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-right: 20px;
+  position: relative;        /* Para las flechas de navegación */
+  margin-right: 2rem;        /* Espacio entre imagen e info */
 }
 
 .modal-foto {
   width: 100%;
-  max-width: 350px; /* Tamaño máximo de la imagen */
+  max-width: 350px;          /* Tamaño máximo de la imagen en desktop */
   height: auto;
 }
 
-/* Columna de información */
+/* Flechas de navegación */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.3);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem 0.8rem;
+  border: none;
+}
+
+.arrow.left {
+  left: 0;
+}
+
+.arrow.right {
+  right: 0;
+}
+
+/* ---------------- INFO (desktop) ---------------- */
 .modal-info {
-  flex: 1;
+  flex: 1;                   /* Ocupa la otra mitad */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .modal-info h3 {
   font-size: 1.8rem;
-  margin-bottom: 10px;
+  margin-bottom: 0.5rem;
   font-weight: bold;
 }
 
-.modal-info p {
-  font-size: 1.8rem;
-  margin-bottom: 15px;
+.modal-info .precio {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
 }
 
-/* Botones de colores y talles */
+/* Secciones de colores y talles */
 .colores,
 .talles {
-  margin-bottom: 20px;
-  margin-top: 10px;
+  margin-bottom: 1rem;
 }
 
 .colores h4,
 .talles h4 {
   font-size: 1rem;
-  margin-bottom: 5px;
+  margin-bottom: 0.5rem;
 }
 
+/* Botones de colores/talles */
 .colores button,
 .talles button {
   margin: 5px 5px 0 0;
@@ -98,121 +124,104 @@
   transition: all 0.3s ease;
 }
 
+/* Botón seleccionado */
 .colores button.selected,
 .talles button.selected {
-  background-color: #f4b400; /* Fondo blanco para botón seleccionado */
-  color: #000; /* Texto negro */
+  background-color: #f4b400;
+  color: #000;
   border: none;
   font-weight: bold;
 }
 
-/* Texto de opciones seleccionadas */
+/* Texto que muestra color/talle seleccionado */
 .selected-options {
   font-size: 1rem;
-  margin-top: 10px;
+  margin-top: 0.5rem;
 }
 
 /* Botón "Agregar al carrito" */
 .add-to-cart {
-  background-color: #f4b400; /* Fondo amarillo */
-  color: #000; /* Texto negro */
+  background-color: #f4b400;
+  color: #000;
   font-weight: bold;
   border: none;
   padding: 12px 20px;
-  text-align: center;
-  cursor: pointer;
   font-size: 1rem;
-  margin-top: 20px;
+  margin-top: 1rem;
   border-radius: 5px;
   transition: background 0.3s ease;
+  cursor: pointer;
 }
 
 .add-to-cart:hover {
-  background-color: #e09e00; /* Color amarillo más oscuro */
+  background-color: #e09e00;
 }
 
-/* Botón de cerrar */
-.close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 1.5rem;
-  color: #fff;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-
-.foto-container .arrow {
-  
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.3); /* Fondo medio transparente */
-  border: none;
-  color: #fff; /* Color de la flecha, ajusta si es necesario */
-  font-size: 1rem;  /* Tamaño más pequeño */
-  cursor: pointer;
-  padding: 2;
-  z-index: 2;
-}
-
-.foto-container .arrow.left {
-  left: 5px; /* Un poco de margen a la izquierda */
-}
-
-.foto-container .arrow.right {
-  right: 5px; /* Un poco de margen a la derecha */
-}
-
-
-/* Media Query para pantallas pequeñas (móviles) */
+/* ----------- MEDIA QUERY: MÓVILES ----------- */
 @media (max-width: 768px) {
   .modal-content {
-    flex-direction: column; /* Coloca la imagen y la información en columnas */
-    padding: 1rem; /* Reduce el padding general */
-    width: 95%; /* Aumenta el ancho del modal */
-    max-width: 100%; /* El modal ocupa casi toda la pantalla */
+    flex-direction: column;    /* Apilamos todo en columna */
+    width: 90%;
+    max-width: 500px;          /* Menor ancho máximo en móvil */
+    max-height: 85vh;          /* Limitamos la altura en móvil */
+    overflow-y: auto;          /* Scroll si se excede */
+    padding: 1rem;
+    margin: 1rem auto;
   }
 
-
-
   .modal-body {
-    flex-direction: column; /* Coloca los elementos uno debajo del otro */
-    padding: 0;
+    flex-direction: column;    /* Imagen e info uno debajo del otro */
+    align-items: center;
+    justify-content: center;
   }
 
   .foto-container {
-    padding-right: 0;
-    padding-bottom: 10px; /* Espacio entre la imagen y el contenido */
-    max-width: 85%;
-    margin-top: 20px; /* Añade margen superior */
+    margin: 1rem 0;
+    margin-right: 0;           /* Eliminamos el margen lateral */
   }
 
   .modal-foto {
-    max-width: 100%; /* La imagen ocupa todo el ancho disponible */
+    max-width: 90%;            /* Imagen no muy ancha en móvil */
+    margin: 0 auto;
+    display: block;
   }
 
   .modal-info {
-    padding: 0 10px; /* Reduce los márgenes laterales */
-    align-items: center; /* Centra el contenido */
-    text-align: center; /* Alinea el texto al centro */
+    margin: 0;                 /* Sin margen lateral */
+    width: 100%;
+    align-items: center;       /* Centra el contenido */
+    text-align: center;
+    margin-top: 1rem;
   }
 
+  .modal-info h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .modal-info .precio {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Botones colores/talles más pequeños y con menos margen */
   .colores button,
   .talles button {
-    padding: 6px 10px; /* Botones más pequeños */
-    font-size: 0.8rem;
+    margin: 0.25rem;
+    padding: 6px 10px;
+    font-size: 0.85rem;
   }
 
+  /* Botón "Agregar al carrito" un poco más chico */
   .add-to-cart {
     font-size: 0.9rem;
     padding: 10px 15px;
   }
 
+  /* Botón de cerrar (X) más pequeño */
   .close {
-    top: 5px;
-    right: 5px;
-    font-size: 1.2rem; /* Botón cerrar más pequeño */
+    top: 10px;
+    right: 10px;
+    font-size: 1.2rem;
   }
 }

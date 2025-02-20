@@ -48,7 +48,7 @@ const Cart = () => {
     }
     try {
       const response = await fetch(
-        `http://localhost/felusanprod/client/apis/buscardescuento.php?cupon=${couponCode}`
+        `http://felusan.com/apis/buscardescuento.php?cupon=${couponCode}`
       );
       if (!response.ok) {
         throw new Error("Error en la consulta del cupón");

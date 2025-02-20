@@ -12,7 +12,7 @@ const ListaCupones = () => {
     setLoading(true);
     setError('');
     try {
-      const response = await fetch("http://localhost/felusanprod/client/apis/obtenerCupones.php");
+      const response = await fetch("http://felusan.com/apis/obtenerCupones.php");
       const data = await response.json();
       // Si data es un array, lo usamos directamente, sino buscamos data.data
       if (Array.isArray(data)) {
@@ -40,7 +40,7 @@ const ListaCupones = () => {
       const formData = new FormData();
       formData.append('id', cuponId);
 
-      const response = await fetch("http://localhost/felusanprod/client/apis/eliminarCupon.php", {
+      const response = await fetch("http://felusan.com/apis/eliminarCupon.php", {
         method: "POST",
         body: formData,
       });

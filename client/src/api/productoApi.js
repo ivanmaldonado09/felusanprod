@@ -3,8 +3,8 @@ import axios from 'axios';
 
 
 
-//const API_URL = 'http://felusan.com/productos.php'; // URL de la API
-const API_URL = 'http://localhost/felusanprod/client/productos.php';
+const API_URL = 'http://felusan.com/productos.php'; // URL de la API
+//const API_URL = 'http://localhost/felusanprod/client/productos.php';
 
 
 // Función para obtener los productos

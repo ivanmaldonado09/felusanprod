@@ -2,8 +2,8 @@ import axios from 'axios';
 
 
 
-//const API_URL = 'http://felusan.com/productosinicio.php'; // URL de la API
-const API_URL = 'http://localhost/felusanprod/client/productosinicio.php';
+const API_URL = 'http://felusan.com/productosinicio.php'; // URL de la API
+//const API_URL = 'http://localhost/felusanprod/client/productosinicio.php';
 
 // Función para obtener los productos
 export const obtenerProductos = async () => {
