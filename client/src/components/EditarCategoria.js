@@ -17,7 +17,7 @@ const EditarCategoria = () => {
     setLoading(true);
     setError('');
     try {
-      const response = await fetch(`http://localhost/felusanprod/client/apis/obtenerCategoriaPorId.php?id=${id}`);
+      const response = await fetch(`http://felusan.com/apis/obtenerCategoriaPorId.php?id=${id}`);
       const data = await response.json();
       if (data.success) {
         const categoria = data.data;
@@ -38,7 +38,7 @@ const EditarCategoria = () => {
   // Se usa el mismo API que devuelve categorías principales (donde padre_id es NULL)
   const fetchParentOptions = async () => {
     try {
-      const response = await fetch("http://localhost/felusanprod/client/apis/obtener_categorias.php");
+      const response = await fetch("http://felusan.com/apis/obtener_categorias.php");
       const data = await response.json();
       if (data.success) {
         // data.data es un array de categorías principales.
@@ -67,7 +67,7 @@ const EditarCategoria = () => {
       // Si no se selecciona padre, se envía cadena vacía para asignar NULL
       formData.append('padre_id', padreId ? padreId : '');
       
-      const response = await fetch('http://localhost/felusanprod/client/apis/actualizarCategoria.php', {
+      const response = await fetch('http://felusan.com/apis/actualizarCategoria.php', {
         method: 'POST',
         body: formData,
       });

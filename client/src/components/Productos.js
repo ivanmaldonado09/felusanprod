@@ -17,7 +17,7 @@ const Productos = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [productosFiltrados, setProductosFiltrados] = useState([]);
   const [error, setError] = useState(null);
-  const [limiteProductos, setLimiteProductos] = useState(9); // Cantidad inicial de productos visibles
+  const [limiteProductos, setLimiteProductos] = useState(9);
 
   const location = useLocation();
 
@@ -55,21 +55,27 @@ const Productos = () => {
     setSearchTerm(searchQuery);
   }, [location.search]);
 
-  // Filtrar productos según los filtros aplicados
+  // Filtrar productos según los filtros aplicados y stock de variantes
   useEffect(() => {
     const filtrarProductos = () => {
       return productos.filter((producto) => {
+        // Verificar que al menos una variante tenga stock usando stock_variantes
+        const tieneStock =
+          producto.stock_variantes &&
+          producto.stock_variantes.some((variant) => variant.stock > 0);
+        if (!tieneStock) return false;
+
         // Búsqueda en nombre y descripción
         const cumpleBusqueda =
           producto.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
           producto.descripcion.toLowerCase().includes(searchTerm.toLowerCase());
 
-        // Filtrar por categoría: si se pasa el parámetro, se compara con producto.categoria_id
+        // Filtrar por categoría: se compara con producto.categoria_id
         const cumpleCategoria =
           !filtros.categoria ||
           Number(producto.categoria_id) === Number(filtros.categoria);
 
-        // Filtrar por subcategoría: si se pasa, se compara con producto.subcategoria_id
+        // Filtrar por subcategoría: se compara con producto.subcategoria_id
         const cumpleSubcategoria =
           !filtros.subcategoria ||
           Number(producto.subcategoria_id) === Number(filtros.subcategoria);

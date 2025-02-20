@@ -13,6 +13,9 @@ import AgregarColor from './components/AgregarColor';
 import AgregarCategoria from './components/AgregarCategoria';
 import ListaCategorias from './components/ListaCategorias';
 import EditarCategoria from './components/EditarCategoria';
+import ListaCupones from './components/ListaCupones';
+import AgregarCupon from './components/AgregarCupon';
+
 
 const App = () => {
   return (
@@ -43,6 +46,12 @@ const App = () => {
         <Route path="/admin/agregarCategoria" element={<AgregarCategoria />} />
 
         <Route path="/admin/editarCategoria/:id" element={<EditarCategoria />} />
+
+        <Route path="/admin/cupones" element={<ListaCupones />} />
+
+        <Route path="/admin/agregarCupon" element={<AgregarCupon />} />
+
+
 
       </Routes>
       

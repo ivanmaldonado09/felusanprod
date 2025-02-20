@@ -33,7 +33,7 @@ const ProductList = () => {
     if (confirmed) {
       setLoading(true);
       try {
-        const response = await fetch("http://localhost/felusanprod/client/apis/eliminar.php", {
+        const response = await fetch("http://felusan.com/apis/eliminar.php", {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -106,6 +106,15 @@ const ProductList = () => {
           disabled={loading}
         >
           Categorias
+        </button>
+
+
+        <button
+          className="add-product-btn"
+          onClick={() => navigate('/admin/cupones')}
+          disabled={loading}
+        >
+          Cupones
         </button>
       </div>
 

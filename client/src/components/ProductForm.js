@@ -56,9 +56,9 @@ const ProductForm = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const coloresResponse = await fetch('http://localhost/felusanprod/client/apis/colores.php');
-        const tallesResponse = await fetch('http://localhost/felusanprod/client/apis/talles.php');
-        const categoriasResponse = await fetch('http://localhost/felusanprod/client/apis/obtener_categorias.php');
+        const coloresResponse = await fetch('http://felusan.com/apis/colores.php');
+        const tallesResponse = await fetch('http://felusan.com/apis/talles.php');
+        const categoriasResponse = await fetch('http://felusan.com/apis/obtener_categorias.php');
         
         const coloresData = await coloresResponse.json();
         const tallesData = await tallesResponse.json();
@@ -164,7 +164,7 @@ setTalles(tallesData.data || tallesData);
     data.append('total_fotos', productPhotos.length);
 
     try {
-      const response = await fetch('http://localhost/felusanprod/client/apis/agregar.php', {
+      const response = await fetch('http://felusan.com/apis/agregar.php', {
         method: 'POST',
         body: data
       });

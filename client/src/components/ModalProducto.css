@@ -14,6 +14,8 @@
   visibility: visible;
 }
 
+
+
 .modal-body {
   display: flex;
   align-items: center;
@@ -139,6 +141,28 @@
   background: transparent;
   border: none;
   cursor: pointer;
+}
+
+
+.foto-container .arrow {
+  
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.3); /* Fondo medio transparente */
+  border: none;
+  color: #fff; /* Color de la flecha, ajusta si es necesario */
+  font-size: 1rem;  /* Tamaño más pequeño */
+  cursor: pointer;
+  padding: 2;
+  z-index: 2;
+}
+
+.foto-container .arrow.left {
+  left: 5px; /* Un poco de margen a la izquierda */
+}
+
+.foto-container .arrow.right {
+  right: 5px; /* Un poco de margen a la derecha */
 }
 
 

@@ -14,7 +14,7 @@ const AgregarCategoria = () => {
   useEffect(() => {
     const fetchMainCategories = async () => {
       try {
-        const response = await fetch("http://localhost/felusanprod/client/apis/obtener_categorias.php");
+        const response = await fetch("http://felusan.com/apis/obtener_categorias.php");
         const data = await response.json();
         if (data.success) {
           setMainCategories(data.data);
@@ -49,7 +49,7 @@ const AgregarCategoria = () => {
         formData.append('categoria_padre', categoriaPadre);
       }
 
-      const response = await fetch("http://localhost/felusanprod/client/apis/agregarCategoria.php", {
+      const response = await fetch("http://felusan.com/apis/agregarCategoria.php", {
         method: "POST",
         body: formData,
       });

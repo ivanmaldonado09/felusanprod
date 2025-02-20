@@ -41,7 +41,9 @@ const EditProductForm = () => {
     const fetchProductData = async () => {
       try {
         // Cargar datos del producto
+        //const productResponse = await fetch(`http://felusan.com/apis/obtener_producto.php?id=${id}`);
         const productResponse = await fetch(`http://localhost/felusanprod/client/apis/obtener_producto.php?id=${id}`);
+        
         const productData = await productResponse.json();
 
         if (productData.success) {
@@ -73,7 +75,13 @@ const EditProductForm = () => {
         }
 
         // Cargar datos de colores, talles y categorías
-        const [coloresData, tallesData, categoriasData] = await Promise.all([
+        // const [coloresData, tallesData, categoriasData] = await Promise.all([
+        //   fetch('http://felusan.com/apis/colores.php').then(res => res.json()),
+        //   fetch('http://felusan.com/apis/talles.php').then(res => res.json()),
+        //   fetch('http://felusan.com/apis/obtener_categorias.php').then(res => res.json())
+        // ]);
+
+          const [coloresData, tallesData, categoriasData] = await Promise.all([
           fetch('http://localhost/felusanprod/client/apis/colores.php').then(res => res.json()),
           fetch('http://localhost/felusanprod/client/apis/talles.php').then(res => res.json()),
           fetch('http://localhost/felusanprod/client/apis/obtener_categorias.php').then(res => res.json())
@@ -550,7 +558,7 @@ const EditProductForm = () => {
               <button 
                 type="button" 
                 className="btn btn-secondary"
-                onClick={() => navigate('/productos')}
+                onClick={() => navigate('/admin')}
               >
                 Cancelar
               </button>

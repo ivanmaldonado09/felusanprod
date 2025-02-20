@@ -12,7 +12,7 @@ const ListaCategorias = () => {
     setLoading(true);
     setError('');
     try {
-      const response = await fetch("http://localhost/felusanprod/client/apis/obtener_categorias.php");
+      const response = await fetch("http://felusan.com/apis/obtener_categorias.php");
       const data = await response.json();
       if (data.success) {
         // Se asume que data.data es un array de categorías principales,
@@ -39,7 +39,7 @@ const ListaCategorias = () => {
       const formData = new FormData();
       formData.append('id', categoryId);
 
-      const response = await fetch("http://localhost/felusanprod/client/apis/eliminar_categoria.php", {
+      const response = await fetch("http://felusan.com/apis/eliminar_categoria.php", {
         method: "POST",
         body: formData,
       });
@@ -60,7 +60,7 @@ const ListaCategorias = () => {
       const formData = new FormData();
       formData.append('id', categoryId);
 
-      const response = await fetch("http://localhost/felusanprod/client/apis/toggle_categoria.php", {
+      const response = await fetch("http://felusan.com/apis/toggle_categoria.php", {
         method: "POST",
         body: formData,
       });

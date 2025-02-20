@@ -18,6 +18,7 @@ const Navbar = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
+        //const response = await axios.get('http://felusan.com/apis/obtener_categorias.php');
         const response = await axios.get('http://localhost/felusanprod/client/apis/obtener_categorias.php');
         if (response.data.success) {
           setCategories(response.data.data);
