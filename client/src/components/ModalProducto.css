@@ -35,7 +35,17 @@
   border: none;
   cursor: pointer;
   z-index: 9999;
+
+  /* Aumentamos el área clicable (touch area) */
+  width: 40px;          /* Tamaño horizontal del botón */
+  height: 40px;         /* Tamaño vertical del botón */
+  text-align: center;   /* Centra la X horizontalmente */
+  line-height: 40px;    /* Centra la X verticalmente */
+  /* O, en su lugar, podrías usar padding
+     padding: 0.5rem; 
+     (pero con width/height fijos tienes más control) */
 }
+
 
 /* Contenedor interior del modal (imagen e info) */
 .modal-body {
